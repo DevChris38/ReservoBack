@@ -1,6 +1,7 @@
-import com.reservo.reservoback.ReservoBackApplication;
+package com.reservo.reservoback;
+
+import com.reservo.reservoback.controller.CustomerController;
 import com.reservo.reservoback.model.Customer;
-import com.reservo.reservoback.repository.CustomerRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +12,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(classes = ReservoBackApplication.class)
 @Transactional
-class CustomerRepositoryTest {
+class CustomerTest {
     @Autowired
-    private CustomerRepository customerRepository;
+    private CustomerController customerController;
 
     @BeforeEach
     public void setUp() throws Exception {
@@ -22,8 +23,8 @@ class CustomerRepositoryTest {
         //save user, verify has ID value after save
         assertNull(user1.getId());
         assertNull(user2.getId());//null before save
-        this.customerRepository.save(user1);
-        this.customerRepository.save(user2);
+        this.customerController.saveCustomer(user1);
+        this.customerController.saveCustomer(user2);
         assertNotNull(user1.getId());
         assertNotNull(user2.getId());
     }
@@ -31,7 +32,7 @@ class CustomerRepositoryTest {
     @Test
     public void testFetchData() {
         /*Test data retrieval*/
-        Customer customerA = customerRepository.findByLastName("jétorisque");
+        Customer customerA = customerController.getCustomerByLastName("jétorisque");
         assertNotNull(customerA);
         assertEquals("Vincent", customerA.getFirstName());
     }

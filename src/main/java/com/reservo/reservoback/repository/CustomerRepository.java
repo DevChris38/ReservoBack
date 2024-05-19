@@ -2,9 +2,9 @@ package com.reservo.reservoback.repository;
 
 import com.reservo.reservoback.model.Customer;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
-@Component
+@Repository
 public interface CustomerRepository extends CrudRepository<Customer, Integer> {
     Customer findByLastName(String lastName);
 }
