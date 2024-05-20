@@ -3,6 +3,8 @@ package com.reservo.reservoback.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.Set;
+
 @Data
 @Entity
 @Table(name = "category")
@@ -11,6 +13,9 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String name;
+
+    @OneToMany(mappedBy = "category")
+    private Set<Services> services;
 
     public Category() {
     }
