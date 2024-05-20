@@ -1,6 +1,7 @@
 package com.reservo.reservoback.service;
 
 import com.reservo.reservoback.model.CustomerServiceEntity;
+import com.reservo.reservoback.model.key.CustomerServiceId;
 import com.reservo.reservoback.repository.CustomerServiceRepository;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,8 @@ public class CustomerServiceService {
     @Autowired
     private CustomerServiceRepository customerServiceRepository;
 
-    public Optional<CustomerServiceEntity> getCustomerService(final Integer id) {
-        return customerServiceRepository.findById(id);
+    public Optional<CustomerServiceEntity> getCustomerService(final CustomerServiceId id) {
+        return customerServiceRepository.findByCustomerIdDateBeginning(id.getCustomerId(), id.getDateBeginning());
     }
 
     public void deleteCustomerService(final Integer id) {
@@ -25,5 +26,9 @@ public class CustomerServiceService {
 
     public CustomerServiceEntity saveCustomerService(CustomerServiceEntity customerServiceEntity) {
         return customerServiceRepository.save(customerServiceEntity);
+    }
+
+    public String getDateEnd(final CustomerServiceId id) {
+        return customerServiceRepository.getDateEnd(id.getCustomerId(), id.getDateBeginning());
     }
 }

@@ -6,21 +6,21 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 
 @Embeddable
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Component
 public class CustomerServiceId implements Serializable {
 
     @Column(name = "customer_id")
     private Integer customerId;
 
     @Column(name = "date_beginning")
-    private LocalDate dateBeginning;
-
+    private String dateBeginning;
 }
